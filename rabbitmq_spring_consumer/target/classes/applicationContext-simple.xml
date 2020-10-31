@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/rabbit
+       http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+    <!--   创建连接工厂-->
+    <rabbit:connection-factory
+            id="connectionFactory"
+            host="127.0.0.1"
+            port="5672"
+            username="guest"
+            password="guest"
+            virtual-host="/"
+    />
+    <!--RabbitAdmin用于创建、绑定、管理队列与交换机 -->
+    <rabbit:admin id="admin" connection-factory="connectionFactory"/>
+    <bean id="simpleListener" class="com.wang.listener.SimpleListener"/>
+    <rabbit:listener-container connection-factory="connectionFactory" auto-declare="true">
+        <rabbit:listener ref="simpleListener" queue-names="helloWorld"/>
+    </rabbit:listener-container>
+
+</beans>

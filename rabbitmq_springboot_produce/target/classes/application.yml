@@ -1,0 +1,15 @@
+# tomcat 启动端口号
+server:
+  port: 8081
+
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+#    publisher-confirm-type: correlated   # 使用confirm模式
+#    publisher-returns: true   # 开启return 模式
+
+
